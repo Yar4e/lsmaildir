@@ -12,10 +12,10 @@ lsmaildir() {
 lsofcurrentdir=$(mktemp)
 
 #Заносим во временный файл листинг директории.
-ls -1 "$@" > $lsofcurrentdir
+ls -A -1 "$@" > $lsofcurrentdir
 
 #Преобразуем листинг директории в человекочитаемый вид. Выстраиваем таблицу соотвествия оригинальных имён файлов и конвертированных.
-ls -1 "$@" | sed -e 's:&:+:g' -e 's:,:/:g' -e 's:++:+-+:g' | iconv -f UTF7 -t UTF8 | paste - $lsofcurrentdir | column -s $'\t' -t
+ls -A -1 "$@" | sed -e 's:&:+:g' -e 's:,:/:g' -e 's:++:+-+:g' | iconv -f UTF7 -t UTF8 | paste - $lsofcurrentdir | column -s $'\t' -t
 
 #Удаляем созданный временный файл.
 rm -f $lsofcurrentdir
